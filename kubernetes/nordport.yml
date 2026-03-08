@@ -1,0 +1,31 @@
+apiVersion : v1
+kind : Pod
+metadata : 
+     name : nord-port
+     lables:
+       app : nord-port
+spec :
+ selector:
+  app : nord-port
+ contenior :
+    - name : my-container
+      image : nginx:latest
+      ports:
+       - containerport : 80
+      
+---
+
+apiVersion: v1
+kind: Service
+metadata :
+  name : nord-service
+  lables:
+    app: nord-service
+spec:
+  type : nordport
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+
+               
