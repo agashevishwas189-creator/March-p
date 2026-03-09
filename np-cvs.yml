@@ -6,18 +6,18 @@ metadata :
       app : nodeport-pod
 spec :
   containers :
-      name : my-container
+    - name : my-container
       image : httpd:latest
       ports : 
-        - containerport : 80
+        - containerPort : 80
 ---
 
 apiVersion : v1
 kind : Service
-metadata :
-    name : nodeport-service
-    labels :
-      app : nodeport-service
+metadata :                               #kubectl apply -f file.yml - to create the service
+    name : nodeport-service              #kubectl get pods
+    labels :                          #kubectl get svc                        
+      app : nodeport-service                    #kubectl delete -f file.yml - to delete the service
 spec : 
   type : NodePort
   selector :
