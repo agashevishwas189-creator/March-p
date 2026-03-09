@@ -1,0 +1,28 @@
+apiVersion : v1
+kind : Pod
+metadata : 
+    name : my-pod
+    Lable : 
+      app : my-pod
+spec :
+  containers :
+    - name : my-container
+      image : httpd:latest
+      ports: 
+      - containers : 80
+
+---
+apiVersion : v1
+kind : service
+metadata :
+    name : cluster-ip-service
+    Lable :
+      app : cluster-ip-service
+spec :
+  type : ClusterIP
+  selector :
+    app : my-pod
+    ports :
+     - protocol : TCP
+       port : 80
+       targetPort : 80
