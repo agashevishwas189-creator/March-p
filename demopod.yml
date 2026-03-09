@@ -2,13 +2,12 @@ apiVersion: v1
 kind: Pod
 metadata:
     name: demo-pod
-    lables: 
-    app: demo-pod
+    labels: 
+      app: demo-pod
 spec:
   containers:
     - name: y-container
-      image: httpd:Latest
-ports:
+      image: httpd:latest
+  ports: 
     - containerPort: 80
-      port: 80 
-      protocol: TCP
+     
