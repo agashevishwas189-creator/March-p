@@ -1,0 +1,38 @@
+apiVersion : v1
+kind : Pod
+metadata : 
+     name : namespace-pod
+     namespace : my-ns
+     labels : 
+       app : namespace-pod 
+spec : 
+   containers:
+      - name : my-container
+        image : nginx:latest
+        ports :
+           - containerPort : 80 
+---
+
+apiVersion : v1
+kind : Service
+metadata :
+    name : namespace-service
+    namespace : my-ns
+    labels :
+      app : namespace-service
+spec :
+  type : ClusterIP
+  selector :
+      app : namespace-pod
+  ports :
+     - protocol : TCP
+       port : 80 
+       targetPort : 80
+
+---
+apiVersion : v1
+kind : Namespace
+metadata :
+     name : my-ns
+     labels :
+       name : namespace-pod    
