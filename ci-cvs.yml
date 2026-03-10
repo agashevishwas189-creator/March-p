@@ -2,21 +2,21 @@ apiVersion : v1
 kind : Pod
 metadata : 
     name : my-pod                      #kubectl apply -f file.yml -apply the file to create the pod
-    Lables :                           #kubectl get pods --show-labels - to show the labels of the pod
+    labels :                           #kubectl get pods --show-labels - to show the labels of the pod
       app : my-pod                     #kubectl get pods -l app=my-pod - to get the pod with the label app=my-pod
 spec :                                 #kubectl describe pod my-pod - to get the details of the pod
   containers :                         #kubectl get pods -o wide - to get the details of the pod in wide format
     - name : my-container              #kubectl logs my-pod - to get the logs of the pod
       image : httpd:latest             #kubectl get svc - to get the services in the cluster
       ports:                           #kubectl delete -f file.yml - to delete the pod
-      - containerport : 80
+      - containerPort : 80
 
 ---
 apiVersion : v1
 kind : Service
 metadata :
     name : cluster-ip-service
-    Lables :
+    labels :
       app : cluster-ip-service
 spec :
   type : ClusterIP

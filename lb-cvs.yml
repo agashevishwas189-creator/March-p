@@ -1,0 +1,28 @@
+apiVersion : v1
+kind : Pod
+metadata : 
+    name : lb-pod
+    labels : 
+     app : lb-pod
+spec : 
+  containers :
+    - name : my-container
+      image : httpd:latest
+      ports :
+        - containerPort : 80
+---
+
+apiVersion : v1
+kind : Service
+metadata :
+    name : lb-service
+    labels :
+      app : lb-service
+spec :
+  type : LoadBalancer
+  selector :
+      app : lb-pod
+  ports :
+     - protocol : TCP
+       port : 80
+       targetPort : 80
