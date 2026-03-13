@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata: 
+    name: my-db
+    labels:
+        app: my-app
+spec:
+   serviceName: my-db
+   replicas: 2
+   selector:
+        matchLabels:
+                app: my-app
+   template: 
+      metadata:
+          labels:
+             app: my-app
+      spec:
+          containers:
+             -  name: db-container
+                image: mysql:latest
+                ports:
+                   - containerPort: 3306
+                     protocol: TCP
+                env:
+                   - name: MYSQL_ROOT_PASSWORD
+                     valueFrom:
+                        secretKeyRef:
+                            name: my-secret
+                            key: dbrootpw
+                    
+
+     
+                             

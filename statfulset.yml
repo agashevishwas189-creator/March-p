@@ -23,6 +23,6 @@ spec:
                      protocol: TCP
                  env:
                    - name: MYSQL_ROOT_PASSWORD  
-                     value: "123456789"
+                     value: "1234567899"
 # without this mysql container will not start this is defult/mindeory 
                              
