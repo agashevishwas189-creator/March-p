@@ -3,11 +3,11 @@ kind: persistentVolumeClaim
 metadata:
     name: my-pvc
 spec:
-  storageClassName: efs-sc
-  volumeMode: Filesystem
-  accessModes:
+  storageClassName: standard #type of storage use for pvc and should be same as pv
+  volumeMode: Filesystem     # type of volume mode for pvc and should be same as pv and its efs
+  accessModes:               # type of access mode for pvc and should be same as pv
     - ReadWriteOnce
-  resources:
-    requests:
-      storage: 15Gi
+  resources:    #specify the storage size for pvc and should be less than or equal to pv
+    requests:    
+      storage: 15Gi #specify the storage size for pvc and should be less than or equal to pv
         
