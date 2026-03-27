@@ -1,6 +1,6 @@
 resource "aws_instance" "dummy" {
     ami = "ami-0f559c3642608c138"
-    instance_type = "t2.micro"
+    instance_type = "t3micro"
     vpc_security_group_ids = ["sg-0c78535db3865697a",aws_security_group.my_sg.id]
 
     tags = {
@@ -28,6 +28,6 @@ resource "aws_security_group" "my_sg" {
         cidr_blocks = ["0.0.0.0/0"]
     }
     tags = {
-      name = my-sg
+      name = "my_sg"
     }   
 }
