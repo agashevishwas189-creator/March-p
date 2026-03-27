@@ -11,3 +11,7 @@ output "instance_id" {
     value = aws_instance.dummy.id
   
 }
+output "vpc_security_group_ids" {
+    value = aws_instance.dummy.vpc_security_group_ids
+  
+}
