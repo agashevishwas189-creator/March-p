@@ -1,6 +1,6 @@
 resource "aws_instance" "dummy" {
-    ami = "ami-0f559c3642608c138"
-    instance_type = "t3.micro"
+    ami = "var.ami_id"
+    instance_type = "var.instance_type.id"
     vpc_security_group_ids = ["sg-0c78535db3865697a",aws_security_group.my_sg.id]
 
     tags = {
