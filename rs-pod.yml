@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Namespace 
+metadata:
+    name: my-ns
+
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+    name: rs-pod
+    namespace: my-ns
+    labels:
+       app: rs-pod
+spec:
+   replicas: 2
+   selector:
+      matchLabels:     # only these difference from rc-pod.ymlgit add .
+         app: rs-pod
+   template:
+     metadata:
+         labels:
+            app: rs-pod   
+     spec: 
+       containers:
+          - name: rs-container
+            image: httpd:latest
+            ports:
+              - containerPort: 80     
+

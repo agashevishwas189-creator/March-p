@@ -1,0 +1,19 @@
+apiVersion: v1 
+kind: Pod 
+metadata: 
+    name: my-pod                                 #name of the pod
+spec:
+   volumes:                                       #create a volume in the pod
+     - name: my-vol                               #name of volume pod will use
+       persistentVolumeClaim:
+          claimName: my-pvc                               #name of pvc which we have created
+   containers:
+       - name: my-container
+         image: nginx:latest
+         volumeMounts:                               #path where we want to mount the volume in the container
+             - mountPath: "/share/local/nginx/"       #path where we want to mount the volume in the container
+               name: my-vol                          #name of volume which we have created in the pod
+         ports:
+            - containerPort: 80
+              protocol: TCP
+        

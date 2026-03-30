@@ -1,0 +1,52 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+    name: rda 
+    labels:
+       app: rda
+spec:
+  strategy:
+    type: RollingUpdate  #specifies the strategy for updating the deployment   
+  selector: 
+    matchLabels:
+         app: rda
+  replicas: 1
+  template:
+    metadata:
+       labels:
+          app: rda
+    spec:
+      containers:
+         - name: rdc
+           image: httpd:latest
+           ports:
+            - containerPort: 80
+              protocol: TCP
+           resources:
+               requests:
+                   cpu: "200m"
+                   memory: "400Mi"
+               limits:
+                   cpu: "400m"
+                   memory: "800Mi"
+---
+apiVersion: autoscaling/v2     
+kind: HorizontalPodAutoscaler
+metadata:
+    name: hpa 
+    labels: 
+       app: hpa
+spec: 
+  scaleTargetRef:  #specifies the target deployment to be scaled 
+     apiVersion: apps/v1
+     kind: Deployment
+     name: rda
+  minReplicas: 1
+  maxReplicas: 2
+  metrics:    #specifies the target metric and its target value for scaling the deployment
+   - type: Resource #specifies the type of metric to be used for scaling the deployment
+     resource: 
+       name: cpu #specifies the name of the resource metric to be used for scaling the deployment
+       target:
+        type: Utilization  #specifies the type of target value to be used for scaling the deployment
+        averageUtilization: 20     #target average cpu utilization percentage across all pods                                       
