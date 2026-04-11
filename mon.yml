@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+---
+apiVersion: v1
+kind: Pod
+mettadata: 
+   name: my-pod
+   Namespace: dev
+   labels: 
+      app: my-app
+spec: 
+   containers:
+   - name: my-container
+     image: nginx:latest
+     ports:
+      - containerPort: 80
+        port: 80
+        protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clusterip
+  namespace: dev
+  labels:
+    app: my-app
+spec: 
+  selector:
+    app: my-app
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: v1 
+kind: Service
+metadata:
+   name: nodeport
+   namespace: dev
+   labels:
+      app: my-app
+spec:
+  selector:
+    app: my-app
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30007
+---
+apiVersion: v1
+kind: LoadBalancer
+metadata:
+   name: loadbalancer
+   namespace: dev
+   labels:
+      app: my-app
+spec:
+  selector:
+    app: my-app
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---   

@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: Prod
+    labels: 
+       app: RS-deploy   
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+    name: RS-deploy
+    namespace: Prod
+    labels:
+       app: RS-deploy
+spec:
+  replicas: 4
+  selector:
+      matchLabels: 
+              app: RS-deploy
+  strategy: 
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 1
+  template:
+      metadata:
+          labels:
+             app: RS-deploy
+      spec: 
+         containers:
+             - name: RS-cont
+               image: httpd:latest
+               ports:
+                - protocol: TCP
+                  containerPort: 80
+               
+                       
+                         
