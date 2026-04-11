@@ -21,3 +21,9 @@ RUN chmod +rwx /opt/apache-tomcat-9.0.117/bin/*.sh
 EXPOSE 8080
 CMD ["/opt/apache-tomcat-9.0.117/bin/catalina.sh", "run"]
 
+
+
+#commad to build the image
+#docker build .
+#docker run -d -p 8080:8080 --name studentapp studentapp:latest
+#docker ps 
