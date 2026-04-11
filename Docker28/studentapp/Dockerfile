@@ -2,8 +2,8 @@ FROM ubuntu:20.04
 
 LABEL maintainer ="vishwas"
 
-RUN apt get update && \     
-    apt install unzip  openjdk-11-jdk -y    
+RUN apt-get update && \     
+    apt-get install unzip  openjdk-11-jdk -y    
 
 ADD  https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.117/bin/apache-tomcat-9.0.117.zip /opt/
 
