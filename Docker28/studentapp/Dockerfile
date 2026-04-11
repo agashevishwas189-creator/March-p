@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-LABEL maintainer ="vishwas"
+LABEL maintainer="vishwas"
 
 RUN apt-get update && \     
     apt-get install unzip  openjdk-11-jdk -y    
