@@ -1,0 +1,22 @@
+apiVesion: apps/v1
+kind: Replicaset 
+metadata: 
+  name: rs-pod 
+  labels: 
+    app: rs-pod
+spec: 
+  selector:
+    matchLabels: 
+      app: rs-pod 
+  replicas: 2
+  template: 
+    metadata: 
+      Labels:
+        app: rs-pod 
+  spec: 
+    containers: 
+      - name: rs-container 
+        image: httpd:latest 
+        ports: 
+          - containerPort: 80
+                      
