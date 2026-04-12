@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Daemonset 
+metadata: 
+  name: ds-pod 
+  labels: 
+    app: ds-pod
+spec:
+  selector:
+    matchLabels: 
+      app: ds-pod
+  template: 
+    metadata: 
+      labels: 
+        app: ds-pod
+  spec:
+    containers: 
+      - name: ds-container 
+        image: amezon/cloudwatch-agent:latest
+        ports: 
+          - containerPort: 80    
+            name: matrics
+            protocol: TCP
+                    

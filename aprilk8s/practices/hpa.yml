@@ -1,0 +1,61 @@
+apiVersion: v1 
+kind: Deployment 
+metadata: 
+  name: ro-deployment 
+  labels: 
+    app: ro-deployment
+spec: 
+  replicas: 2
+  selector: 
+    matchLabels: 
+      app: ro-deployment
+  stratorgy: 
+    type: RollingUpdate 
+    rollingUpdate: 
+      maxUnavailable: 1
+      maxSurge: 2    
+    template: 
+      metadata: 
+        labels: 
+          app: ro-deployment 
+      spec: 
+        containers: 
+          - name: ro-container 
+            image: httpd:latest 
+            resources: 
+              requests: 
+                cpu: 100m 
+                memory: 200Mi
+              Limits:
+                cpu: 200m 
+                memory: 400Mi  
+            ports: 
+              - containerPort: 80  
+                protocol: TCP
+---
+apiVersion: autoscaling/v2 
+kind: HorizontalPodAutoScaler
+metadata: 
+  name: hpa-deployment
+  labels: 
+    app: hpa-deployment
+spec:
+   scaleTargetRef: 
+     apiVersion: v1 
+     kind: Deployment 
+     metadata: 
+       name: ro-deployment
+   minReplicas: 2
+   maxReplicas: 6
+   metrics: 
+     - type: Resource 
+       resource: 
+         name: cpu 
+         target: 
+           type: Utilization 
+           averageUtilization: 50
+---            
+
+
+     
+                      
