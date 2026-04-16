@@ -1,0 +1,20 @@
+apiVersion: v1 
+kind: Pod 
+metadata: 
+  name: pv-pod
+  labels: 
+   app: pv-pod
+spec:
+  volumes:    #name of container volume  (must be same as name in volumeMounts)
+    - name: pv-volume
+      persistentVolumeClaim: 
+        claimName: pv-claim  #name of PVC
+  containers: 
+    -  name: my-container 
+       image: nginx:latest 
+       ports: 
+         - containerPort: 80
+       volumeMounts: 
+         - name: pv-volume
+           mountPath: "/share/local/nginx/" #path inside container where volume will be mounted
+       
