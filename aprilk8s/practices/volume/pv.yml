@@ -1,0 +1,16 @@
+apiVersion: v1 
+kind: PersistantVolume 
+metadata: 
+  name: pv-volume
+  labels:
+    type: my-pv
+spec: 
+   storageClassName: Standerd #StorageClassName is used to specify which StorageClass provisioner should be used to dynamically provision the PersistentVolume. If not specified, the default provisioner will be used.
+   volumeMode: Filesystem #VolumeMode defines whether a volume is meant to be consumed as a filesystem or as a raw block device. Default is "Filesystem"
+   accessModes: 
+     - ReadWriteOnce #ReadWriteOnce, ReadOnlyMany, ReadWriteMany
+   capacity: 
+     storage: 10Gi
+   persitantVolumeReclaimPolicy: Retain #what to do with PV when PVC is deleted (Retain, Recycle, Delete)
+   hostpath:  #hostpath is used to specify a directory on the node that will be used as the storage for the PersistentVolume. This is a simple way to create a PersistentVolume without using an external storage system. However, it is not recommended for production use as it does not provide any data redundancy or high availability.
+     path: "mnt/data" #path on node where volume data will be stored        
